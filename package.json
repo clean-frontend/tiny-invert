@@ -1,0 +1,28 @@
+{
+  "name": "tiny-invert",
+  "version": "1.0.0",
+  "description": "tiny functional dependency injection for TypeScript",
+  "module": "dist/index.mjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest"
+  },
+  "keywords": [
+    "di",
+    "ioc"
+  ],
+  "author": "Evgeny Paromov",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "dependencies": {
+    "nanoid": "^5.0.7"
+  }
+}
