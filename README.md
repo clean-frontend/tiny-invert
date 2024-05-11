@@ -58,7 +58,7 @@ const AuthServiceModule = createModule(
   authServiceProvider,
 );
 
-// Pass module dependencies
+// Create module instance
 const authService = AuthServiceModule.init({
   logger: new Logger(),
   api: new Api(),
@@ -68,10 +68,22 @@ const authService = AuthServiceModule.init({
 authService.login("Evgeny Paromov", "12345");
 ```
 
+## Table of Contents
+
+- [Guide](#guide)
+  - [Container](#container)
+  - [Provider](#provider)
+  - [Module](#module)
+  - [Modules composition](#modules-composition)
+- [Recipes](#recipes)
+  - [Provider entrypoint](#provider-entrypoint)
+  - [Unit testing](#unit-testing)
+  - [Async providers](#async-providers)
+
 ## Install
 
 ```sh
-npm install nanostores
+npm install tiny-invert
 ```
 
 ## Guide
@@ -160,7 +172,7 @@ const provider3 = mergeContainers([Container1, Container2]).provider((ctx) => {
 
 Use this to Interface Segregation Principle (ISP) realization.
 
-### Modules
+### Module
 
 Modules are used to define the entry point of provider hierarchy.
 
@@ -247,24 +259,20 @@ const parentModule = ParentModule.init({ config: {} });
 
 ## Recipes
 
-
 ### Provider entrypoint
 
-```typescript 
-
+```typescript
 const Container = createContainer();
 
-const provider1 = Container.provider((ctx) => {})
-const provider2 = Container.provider((ctx) => {})
+const provider1 = Container.provider((ctx) => {});
+const provider2 = Container.provider((ctx) => {});
 
-
-createModule(Container.provider(ctx => ctx.innerDeps, {
+createModule(
+  Container.provider((ctx) => ctx.innerDeps, {
     provider1,
-    provider2
-}))
-
-
-
+    provider2,
+  }),
+);
 ```
 
 ### Unit testing
@@ -313,4 +321,3 @@ const Module = createModule(provider2);
 
 const asyncModuleInstance = await Module.init();
 ```
-
