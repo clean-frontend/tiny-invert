@@ -7,6 +7,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   dts: true,
-  minify: true,
   entryPoints: ["lib/index.ts"],
 });
