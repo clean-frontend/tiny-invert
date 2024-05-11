@@ -1,15 +1,21 @@
 {
   "name": "tiny-invert",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "tiny functional dependency injection for TypeScript",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup",
+    "format": "prettier --write .",
+    "prepublish": "npm run build",
     "dev": "tsup --watch",
     "test": "vitest"
   },
+  "files": [
+    "dist/**/*",
+    "lib/**/*"
+  ],
   "keywords": [
     "di",
     "ioc"
