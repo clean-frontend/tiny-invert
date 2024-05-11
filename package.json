@@ -2,6 +2,7 @@
   "name": "tiny-invert",
   "version": "0.1.0",
   "description": "tiny functional dependency injection for TypeScript",
+  "repository": "https://github.com/clean-frontend/tiny-invert",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
