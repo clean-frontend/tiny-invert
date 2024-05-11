@@ -6,13 +6,15 @@ import {
   ProvidersRecord,
 } from "./provider";
 
+type DefaultProvidersRecord = Record<never, Provider>;
+
 export type ProviderFactory<Deps> = <
   R,
-  I extends ProvidersRecord<Deps> = Record<never, Provider<Deps>>,
+  I extends ProvidersRecord<Deps> = DefaultProvidersRecord,
 >(
   factory: ProviderValueFactory<Deps, InferProvidersRecordValue<I>, R>,
   innerDeps?: I,
-) => Provider<Deps, I, R>;
+) => Provider<Deps, InferProvidersRecordValue<I>, R>;
 
 export type ExtendContainer<Deps> = <Deps2>(
   name: string,

@@ -13,7 +13,6 @@ export function createContainer<Deps>(
   ): Provider => {
     return {
       __value: undefined as any,
-      __deps: undefined as any,
       __innerDeps: undefined as any,
       id: `${factory.name}-${nanoid()}`,
       containerName,

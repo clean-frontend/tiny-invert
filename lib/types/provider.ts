@@ -1,6 +1,6 @@
 export type ProviderId = string;
-export type ProviderValue = unknown;
-export type ContainerDeps = unknown;
+export type ProviderValue = any;
+export type ContainerDeps = any;
 export type InnerDepsRecord = Record<string, ProviderValue>;
 
 export type ProviderValueFactory<
@@ -11,16 +11,15 @@ export type ProviderValueFactory<
 
 export type Provider<
   Deps = ContainerDeps,
-  InnerDeps extends ProvidersRecord<Deps> = any,
+  InnerDeps extends InnerDepsRecord = any,
   Value = ProviderValue,
 > = {
   __value: Value;
-  __deps: Deps;
   __innerDeps: InnerDeps;
   containerName: string;
   id: ProviderId;
   innderDeps: ProvidersRecord;
-  factory: ProviderValueFactory;
+  factory: ProviderValueFactory<Deps, InnerDeps, Value>;
 };
 
 export type ProvidersRecord<Deps = ContainerDeps> = Record<
@@ -29,7 +28,9 @@ export type ProvidersRecord<Deps = ContainerDeps> = Record<
 >;
 
 export type InferProviderValue<T extends Provider> = T["__value"];
-export type InferProviderDeps<T extends Provider> = T["__deps"];
+export type InferProviderDeps<T extends Provider> = Parameters<
+  T["factory"]
+>[0]["deps"];
 export type InferProviderInnerDeps<T extends Provider> = T["__innerDeps"];
 export type InferProvidersRecordValue<T extends ProvidersRecord> = {
   [K in keyof T]: InferProviderValue<T[K]>;
