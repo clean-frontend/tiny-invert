@@ -17,7 +17,7 @@ export type ProviderFactory<Deps> = <
 ) => Provider<Deps, InferProvidersRecordValue<I>, R>;
 
 export type ExtendContainer<Deps> = <Deps2>(
-  name: string,
+  name?: string,
 ) => Container<Deps & Deps2>;
 
 export type Container<Deps = ContainerDeps> = {
