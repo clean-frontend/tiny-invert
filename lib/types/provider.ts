@@ -14,8 +14,9 @@ export type Provider<
   InnerDeps extends InnerDepsRecord = any,
   Value = ProviderValue,
 > = {
-  __value: Value;
-  __innerDeps: InnerDeps;
+  $inferValue: Value;
+  $inferInnerDeps: InnerDeps;
+  $inferDeps: Deps;
   containerName: string;
   id: ProviderId;
   innderDeps: ProvidersRecord;
@@ -27,11 +28,6 @@ export type ProvidersRecord<Deps = ContainerDeps> = Record<
   Provider<Deps>
 >;
 
-export type InferProviderValue<T extends Provider> = T["__value"];
-export type InferProviderDeps<T extends Provider> = Parameters<
-  T["factory"]
->[0]["deps"];
-export type InferProviderInnerDeps<T extends Provider> = T["__innerDeps"];
 export type InferProvidersRecordValue<T extends ProvidersRecord> = {
-  [K in keyof T]: InferProviderValue<T[K]>;
+  [K in keyof T]: T[K]["$inferValue"];
 };

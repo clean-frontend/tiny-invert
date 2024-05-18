@@ -1,7 +1,5 @@
-import { InferProviderDeps, InferProviderValue, Provider } from "./provider";
+import { Provider } from "./provider";
 
 export type Module<EntryProvider extends Provider> = {
-  init: (
-    deps: InferProviderDeps<EntryProvider>,
-  ) => InferProviderValue<EntryProvider>;
+  init: (deps: EntryProvider["$inferDeps"]) => EntryProvider["$inferValue"];
 };

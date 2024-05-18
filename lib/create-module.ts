@@ -1,6 +1,5 @@
 import { Module } from "./types/module";
 import {
-  InferProviderDeps,
   Provider,
   ProviderId,
   ProviderValue,
@@ -31,7 +30,7 @@ const checkCircularDependency = (
 export const createModule = <EntryProvider extends Provider>(
   entryProvider: EntryProvider,
 ): Module<EntryProvider> => {
-  type Deps = InferProviderDeps<EntryProvider>;
+  type Deps = EntryProvider["$inferDeps"];
   checkCircularDependency(entryProvider, new Set());
 
   const resolveDependency = (

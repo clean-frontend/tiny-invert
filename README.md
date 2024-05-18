@@ -121,6 +121,14 @@ const ExtendedContainer = Container.extend<{ test3: string }>();
 // Container<{ test1: string } & { test2: string } & { test3: string }>
 ```
 
+You can infer Container dependencies type
+
+```typescript
+const Container = createContainer<{ test1: string }>();
+
+type CotnainerDeps = typeof Container.$inferDeps;
+```
+
 ### Providers
 
 Provider is an object with a factory and links of dependency providers.
@@ -171,6 +179,14 @@ const provider3 = mergeContainers([Container1, Container2]).provider((ctx) => {
 ```
 
 Use this to Interface Segregation Principle (ISP) realization.
+
+Use can infer provider dependencies and return type.
+
+```typescript
+type ProviderDeps = typeof provider.$inferDeps;
+type ProviderResult = typeof provider.$inferResult;
+type ProviderInnerDeps = typeof provider.$inferInnerDeps;
+```
 
 ### Module
 

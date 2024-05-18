@@ -24,9 +24,5 @@ export type Container<Deps = ContainerDeps> = {
   provider: ProviderFactory<Deps>;
   containerName: string;
   extend: ExtendContainer<Deps>;
-  __deps: Deps;
+  $inferDeps: Deps;
 };
-
-// Async provider
-
-export type InferContainerDeps<T extends Container> = T["__deps"];

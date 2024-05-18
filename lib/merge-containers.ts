@@ -6,6 +6,6 @@ import { UnionToIntersection } from "./types/utils";
 export const mergeContainers = <Containers extends Container<any>[]>(
   _: Containers,
   name?: string,
-): Container<UnionToIntersection<Containers[number]["__deps"]>> => {
+): Container<UnionToIntersection<Containers[number]["$inferDeps"]>> => {
   return createContainer(name);
 };

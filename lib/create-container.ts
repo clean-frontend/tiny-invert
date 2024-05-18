@@ -12,8 +12,9 @@ export function createContainer<Deps>(
     innerDeps = {} as any,
   ): Provider => {
     return {
-      __value: undefined as any,
-      __innerDeps: undefined as any,
+      $inferValue: undefined as any,
+      $inferDeps: undefined as any,
+      $inferInnerDeps: undefined as any,
       id: `${factory.name}-${nanoid()}`,
       containerName,
       innderDeps: innerDeps,
@@ -26,7 +27,7 @@ export function createContainer<Deps>(
   };
 
   return {
-    __deps: null as Deps,
+    $inferDeps: null as Deps,
     extend,
     containerName,
     provider: createProvider as any,
