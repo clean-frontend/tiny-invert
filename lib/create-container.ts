@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { Container, ExtendContainer } from "./types/container";
 import { Provider, ProviderValueFactory } from "./types/provider";
+import { createModule } from "./create-module";
 
 /* @__NO_SIDE_EFFECTS__ */
 export function createContainer<Deps>(
@@ -10,8 +11,8 @@ export function createContainer<Deps>(
   const createProvider = (
     factory: ProviderValueFactory,
     innerDeps = {} as any,
-  ): Provider => {
-    return {
+  ) => {
+    const provider: Provider = {
       $inferValue: undefined as any,
       $inferDeps: undefined as any,
       $inferInnerDeps: undefined as any,
@@ -19,7 +20,10 @@ export function createContainer<Deps>(
       containerName,
       innderDeps: innerDeps,
       factory,
+      init: (deps) => createModule(provider).init(deps),
     };
+
+    return provider;
   };
 
   const extend: ExtendContainer<Deps> = (name) => {

@@ -21,6 +21,7 @@ export type Provider<
   id: ProviderId;
   innderDeps: ProvidersRecord;
   factory: ProviderValueFactory<Deps, InnerDeps, Value>;
+  init: (deps: Deps) => Value;
 };
 
 export type ProvidersRecord<Deps = ContainerDeps> = Record<
